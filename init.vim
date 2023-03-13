@@ -16,7 +16,7 @@ syntax on
 
 
 " spell languages
-set spelllang=en-gb
+set spelllang=en_gb
 
 call plug#begin('~/.config/nvim/plugged')
 
@@ -36,13 +36,12 @@ Plug 'honza/vim-snippets'
 Plug 'leafgarland/typescript-vim'
 Plug 'elzr/vim-json'
 Plug 'plasticboy/vim-markdown'
-Plug 'wfxr/minimap.vim'
 Plug 'junegunn/goyo.vim' " Distraction-free writing
-Plug 'junegunn/limelight.vim' " Highlights one line at a time
 Plug 'masukomi/vim-markdown-folding' " Fold by secttion headings
 Plug 'alvan/vim-closetag'
 Plug 'SirVer/ultisnips'
 Plug 'MaxMEllon/vim-jsx-pretty' "Syntax highlighting and indenting for jsx
+Plug 'lervag/vimtex'
 
 " appearance/themes
 Plug 'ryanoasis/vim-devicons' " icons
@@ -80,6 +79,7 @@ set termguicolors
 colorscheme gruvbox-material
 
 let g:airline_theme='gruvbox_material'
+
 " vim multi cursor 
 let g:multi_cursor_use_default_mapping=0
 
@@ -112,6 +112,15 @@ let g:UltiSnipsJumpForwardTrigger="<C-e>"
 set splitright
 set splitbelow
 
+"vimtex settings
+filetype plugin indent on
+let g:vimtex_view_method = 'skim'
+
+
+
+let minimap_auto_start = 0
+
+
 tnoremap <Esc> <C-\><C-n>
 
 " move split panes to left/bottom/top/right
@@ -133,7 +142,13 @@ nnoremap <C-f> :NERDTreeFocus<CR>
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 inoremap jk <esc>:w<CR>
-inoremap <C-b> <C-o>db
+
+" A shitty attempt at replicatoing Alt Backspace using Ctrl b instead
+" inoremap <C-b> <C-o>db
+
+" Vim seems to think that Alt is escape, so this gives Alt + Backspace
+" functionality! Yay!
+imap <Esc><BS> <C-w>
 
 " Clear screen clears search highlighting.
 nnoremap <C-q> :nohl<CR><C-L>
@@ -154,6 +169,8 @@ function! s:check_back_space() abort
                   \ pumvisible() ? "\<C-n>" :
                   \ <SID>check_back_space() ? "\<TAB>" :
                   \ coc#refresh()
+
+
 
 imap jj <Esc>
 
@@ -193,6 +210,7 @@ function! ToggleWrap()
   set wrap nolist
   if s:wrapenabled
     set nolinebreak
+	set nospell 
     unmap j
     unmap k
     unmap 0
@@ -201,6 +219,7 @@ function! ToggleWrap()
     let s:wrapenabled = 0
   else
     set linebreak
+	set spell 
     nnoremap j gj
     nnoremap k gk
     nnoremap 0 g0
@@ -222,6 +241,7 @@ nnoremap <leader>s :xall<CR>
 
 
 " For Goyo
+nnoremap <leader>g :Goyo<CR>
 
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
+" autocmd! User GoyoEnter Limelight
+" autocmd! User GoyoLeave Limelight!
