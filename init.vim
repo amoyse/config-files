@@ -245,3 +245,5 @@ nnoremap <leader>g :Goyo<CR>
 
 " autocmd! User GoyoEnter Limelight
 " autocmd! User GoyoLeave Limelight!
+
+autocmd BufNewFile,BufRead *.asm,*.nasm set syntax=nasm
