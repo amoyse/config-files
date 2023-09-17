@@ -39,5 +39,8 @@ api.nvim_create_autocmd({ 'BufRead', 'BufReadPost' }, {
   end,
 })
 
-
+api.nvim_create_autocmd(
+    { 'BufRead', 'BufNewFile' },
+    { pattern = {"*.asm", "*.nasm"}, command = "set syntax=nasm" }
+)
 
