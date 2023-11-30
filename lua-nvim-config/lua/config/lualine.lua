@@ -1,5 +1,5 @@
 local function getWords()
-  if vim.bo.filetype == "md" or vim.bo.filetype == "txt" or vim.bo.filetype == "markdown" then
+  if vim.bo.filetype == "md" or vim.bo.filetype == "txt" or vim.bo.filetype == "markdown" or vim.bo.filetype == "latex" or vim.bo.filetype == "tex" then
     if vim.fn.wordcount().visual_words == 1 then
       return tostring(vim.fn.wordcount().visual_words) .. " word"
     elseif not (vim.fn.wordcount().visual_words == nil) then
