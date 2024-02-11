@@ -28,6 +28,10 @@ vim.opt.smartcase = true            -- but make it case sensitive if an uppercas
 
 vim.opt.foldenable = false
 
+vim.opt.conceallevel = 1
+
+
+
 local api = vim.api
 api.nvim_create_autocmd({ 'BufRead', 'BufReadPost' }, {
   callback = function()

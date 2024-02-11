@@ -161,6 +161,12 @@ _G.packer_plugins = {
     path = "/Users/AlexMoyse/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/nvim-tree/nvim-web-devicons"
   },
+  ["obsidian.nvim"] = {
+    config = { "\27LJ\2\nD\0\0\3\0\4\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0009\0\3\0D\0\1\0\19gf_passthrough\tutil\robsidian\frequireE\0\0\3\0\4\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0009\0\3\0D\0\1\0\20toggle_checkbox\tutil\robsidian\frequire�\v\1\0\t\0@\0G6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2>\0004\3\3\0005\4\3\0005\5\4\0005\6\5\0=\6\6\0055\6\a\0=\6\b\0055\6\t\0005\a\v\0005\b\n\0=\b\f\a5\b\r\0=\b\14\a5\b\15\0=\b\16\a=\a\17\0065\a\18\0=\a\19\0065\a\20\0=\a\21\0065\a\22\0=\a\23\0065\a\24\0=\a\25\0065\a\26\0=\a\27\0065\a\29\0005\b\28\0=\b\30\a5\b\31\0=\b \a5\b!\0=\b\"\a5\b#\0=\b$\a5\b%\0=\b&\a5\b'\0=\b(\a5\b)\0=\b*\a5\b+\0=\b,\a5\b-\0=\b.\a=\a/\6=\0060\0055\0066\0005\a2\0003\b1\0=\b3\a5\b4\0=\b5\a=\a7\0065\a9\0003\b8\0=\b3\a5\b:\0=\b5\a=\a;\6=\6<\5=\5=\4>\4\1\3=\3?\2B\0\2\1K\0\1\0\15workspaces\1\0\0\14overrides\rmappings\15<leader>ch\1\0\1\vbuffer\2\1\0\0\0\agf\1\0\0\topts\1\0\3\texpr\2\fnoremap\1\vbuffer\2\vaction\1\0\0\0\aui\14hl_groups\26ObsidianHighlightText\1\0\1\abg\f#75662e\16ObsidianTag\1\0\2\vitalic\2\afg\f#89ddff\24ObsidianExtLinkIcon\1\0\1\afg\f#c792ea\20ObsidianRefText\1\0\2\14underline\2\afg\f#c792ea\19ObsidianBullet\1\0\2\tbold\2\afg\f#89ddff\18ObsidianTilde\1\0\2\tbold\2\afg\f#ff5370\23ObsidianRightArrow\1\0\2\tbold\2\afg\f#f78c6c\17ObsidianDone\1\0\2\tbold\2\afg\f#89ddff\17ObsidianTodo\1\0\0\1\0\2\tbold\2\afg\f#f78c6c\ttags\1\0\1\rhl_group\16ObsidianTag\19highlight_text\1\0\1\rhl_group\26ObsidianHighlightText\19reference_text\1\0\1\rhl_group\20ObsidianRefText\23external_link_icon\1\0\2\rhl_group\24ObsidianExtLinkIcon\tchar\b\fbullets\1\0\2\rhl_group\19ObsidianBullet\tchar\6-\15checkboxes\6>\1\0\2\rhl_group\23ObsidianRightArrow\tchar\b\6x\1\0\2\rhl_group\17ObsidianDone\tchar\b\6 \1\0\0\1\0\2\rhl_group\17ObsidianTodo\tchar\b☐\1\0\2\venable\2\20update_debounce\3�\1\15completion\1\0\a\25preferred_link_style\twiki\23new_notes_location\17notes_subdir\14min_chars\3\2\rnvim_cmp\2\18use_path_only\1\22prepend_note_path\1\20prepend_note_id\2\16daily_notes\1\0\3\16date_format\15YYYY-mm-dd\rtemplate\19daily-template\vfolder$notes/journal-stuff/daily-pages\1\0\1\17notes_subdir\23notes/zettelkasten\1\0\2\tname\18alex-obsidian\tpathZ~/Users/AlexMoyse/Library/Mobile Documents/iCloud~md~obsidian/Documents/alex-obsidian\nsetup\robsidian\frequire\0" },
+    loaded = true,
+    path = "/Users/AlexMoyse/.local/share/nvim/site/pack/packer/start/obsidian.nvim",
+    url = "https://github.com/epwalsh/obsidian.nvim"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/Users/AlexMoyse/.local/share/nvim/site/pack/packer/start/packer.nvim",
@@ -210,6 +216,14 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: surround.nvim
+time([[Config for surround.nvim]], true)
+try_loadstring("\27LJ\2\nU\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\19mappings_style\rsurround\nsetup\rsurround\frequire\0", "config", "surround.nvim")
+time([[Config for surround.nvim]], false)
+-- Config for: obsidian.nvim
+time([[Config for obsidian.nvim]], true)
+try_loadstring("\27LJ\2\nD\0\0\3\0\4\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0009\0\3\0D\0\1\0\19gf_passthrough\tutil\robsidian\frequireE\0\0\3\0\4\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0009\0\3\0D\0\1\0\20toggle_checkbox\tutil\robsidian\frequire�\v\1\0\t\0@\0G6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2>\0004\3\3\0005\4\3\0005\5\4\0005\6\5\0=\6\6\0055\6\a\0=\6\b\0055\6\t\0005\a\v\0005\b\n\0=\b\f\a5\b\r\0=\b\14\a5\b\15\0=\b\16\a=\a\17\0065\a\18\0=\a\19\0065\a\20\0=\a\21\0065\a\22\0=\a\23\0065\a\24\0=\a\25\0065\a\26\0=\a\27\0065\a\29\0005\b\28\0=\b\30\a5\b\31\0=\b \a5\b!\0=\b\"\a5\b#\0=\b$\a5\b%\0=\b&\a5\b'\0=\b(\a5\b)\0=\b*\a5\b+\0=\b,\a5\b-\0=\b.\a=\a/\6=\0060\0055\0066\0005\a2\0003\b1\0=\b3\a5\b4\0=\b5\a=\a7\0065\a9\0003\b8\0=\b3\a5\b:\0=\b5\a=\a;\6=\6<\5=\5=\4>\4\1\3=\3?\2B\0\2\1K\0\1\0\15workspaces\1\0\0\14overrides\rmappings\15<leader>ch\1\0\1\vbuffer\2\1\0\0\0\agf\1\0\0\topts\1\0\3\texpr\2\fnoremap\1\vbuffer\2\vaction\1\0\0\0\aui\14hl_groups\26ObsidianHighlightText\1\0\1\abg\f#75662e\16ObsidianTag\1\0\2\vitalic\2\afg\f#89ddff\24ObsidianExtLinkIcon\1\0\1\afg\f#c792ea\20ObsidianRefText\1\0\2\14underline\2\afg\f#c792ea\19ObsidianBullet\1\0\2\tbold\2\afg\f#89ddff\18ObsidianTilde\1\0\2\tbold\2\afg\f#ff5370\23ObsidianRightArrow\1\0\2\tbold\2\afg\f#f78c6c\17ObsidianDone\1\0\2\tbold\2\afg\f#89ddff\17ObsidianTodo\1\0\0\1\0\2\tbold\2\afg\f#f78c6c\ttags\1\0\1\rhl_group\16ObsidianTag\19highlight_text\1\0\1\rhl_group\26ObsidianHighlightText\19reference_text\1\0\1\rhl_group\20ObsidianRefText\23external_link_icon\1\0\2\rhl_group\24ObsidianExtLinkIcon\tchar\b\fbullets\1\0\2\rhl_group\19ObsidianBullet\tchar\6-\15checkboxes\6>\1\0\2\rhl_group\23ObsidianRightArrow\tchar\b\6x\1\0\2\rhl_group\17ObsidianDone\tchar\b\6 \1\0\0\1\0\2\rhl_group\17ObsidianTodo\tchar\b☐\1\0\2\venable\2\20update_debounce\3�\1\15completion\1\0\a\25preferred_link_style\twiki\23new_notes_location\17notes_subdir\14min_chars\3\2\rnvim_cmp\2\18use_path_only\1\22prepend_note_path\1\20prepend_note_id\2\16daily_notes\1\0\3\16date_format\15YYYY-mm-dd\rtemplate\19daily-template\vfolder$notes/journal-stuff/daily-pages\1\0\1\17notes_subdir\23notes/zettelkasten\1\0\2\tname\18alex-obsidian\tpathZ~/Users/AlexMoyse/Library/Mobile Documents/iCloud~md~obsidian/Documents/alex-obsidian\nsetup\robsidian\frequire\0", "config", "obsidian.nvim")
+time([[Config for obsidian.nvim]], false)
 -- Config for: nvim-autopairs
 time([[Config for nvim-autopairs]], true)
 try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
@@ -218,10 +232,6 @@ time([[Config for nvim-autopairs]], false)
 time([[Config for nvim-comment]], true)
 try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\17nvim_comment\frequire\0", "config", "nvim-comment")
 time([[Config for nvim-comment]], false)
--- Config for: surround.nvim
-time([[Config for surround.nvim]], true)
-try_loadstring("\27LJ\2\nU\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\19mappings_style\rsurround\nsetup\rsurround\frequire\0", "config", "surround.nvim")
-time([[Config for surround.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
