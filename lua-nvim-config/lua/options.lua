@@ -49,3 +49,7 @@ api.nvim_create_autocmd(
     { pattern = {"*.asm", "*.nasm"}, command = "set syntax=nasm" }
 )
 
+api.nvim_create_autocmd(
+    { 'BufRead', 'BufNewFile' },
+    { pattern = {"*.md", "*.txt", "*.tex"}, command = "lua WriterMode()" }
+)
