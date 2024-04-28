@@ -1,8 +1,8 @@
 -- define common options
--- local opts = {
---     noremap = true,      -- non-recursive
---     silent = true,       -- do not show message
--- }
+local opts = {
+    noremap = true,      -- non-recursive
+    silent = true,       -- do not show message
+}
 
 
 -- Leader stuff
@@ -82,4 +82,4 @@ end
 
 vim.keymap.set("n", "<leader>w", ":lua WriterMode()<CR>")
 
-
+vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
