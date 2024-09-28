@@ -82,4 +82,4 @@ end
 
 vim.keymap.set("n", "<leader>w", ":lua WriterMode()<CR>")
 
-
+vim.api.nvim_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
