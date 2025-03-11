@@ -124,6 +124,13 @@ require('lspconfig').pylsp.setup {
 
 
 
+require('lspconfig').ltex.setup {
+  settings = {
+    ltex = {
+      language = "en-GB"
+    }
+  }
+}
 
 
 lsp.setup()
