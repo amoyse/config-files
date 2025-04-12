@@ -110,11 +110,11 @@ require('lspconfig').pylsp.setup {
                     -- environment = {"odoo"},
                 },
                 pyflakes={enabled=true},
-                pylint = {args = {'--ignore=E501,E231,W293,W291,E303,E265,E226,E262,W391,E301,F405,E305,F401', '-'}, enabled=true, debounce=200},
+                pylint = {args = {'--ignore=E501,E231,W293,W291,E303,E265,E226,E262,W391,E301', '-'}, enabled=true, debounce=200},
                 pylsp_mypy={enabled=false},
                 pycodestyle={
                     enabled=true,
-                    ignore={'E501', 'E231', 'W293', 'W291', 'E303', 'E265', 'E226', 'E262', 'W391', 'E301', 'F405', 'E305', 'F401' },
+                    ignore={'E501', 'E231', 'W293', 'W291', 'E303', 'E265', 'E226', 'E262', 'E391', 'E301' },
                     maxLineLength=120},
                     yapf={enabled=true}
                 }
