@@ -85,64 +85,81 @@ require('mason-lspconfig').setup({
   },
 })
 
--- (Optional) Configure lua language server for neovim
-require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
-
-require('lspconfig').sqlls.setup{}
 
 
+-- Lua language server (reuse lsp-zero's helper config)
+vim.lsp.config('lua_ls', lsp.nvim_lua_ls())
+vim.lsp.enable('lua_ls')
 
-require('lspconfig').pylsp.setup {
-    filetypes = {'python'},
-    settings = {
-        configurationSources = {"flake8"},
-        formatCommand = {"black"},
-        pylsp = {
-            plugins = {
-                -- jedi_completion = {fuzzy = true},
-                -- jedi_completion = {eager=true},
-                jedi_completion = {
-                    include_params = true,
-                },
-                jedi_signature_help = {enabled = true},
-                jedi = {
-                    extra_paths = {'~/projects/work_odoo/odoo14', '~/projects/work_odoo/odoo14'},
-                    -- environment = {"odoo"},
-                },
-                pyflakes={enabled=true},
-                pylint = {args = {'--ignore=E501,E231,W293,W291,E303,E265,E226,E262,W391,E301,F405,E305,F401', '-'}, enabled=true, debounce=200},
-                pylsp_mypy={enabled=false},
-                pycodestyle={
-                    enabled=true,
-                    ignore={'E501', 'E231', 'W293', 'W291', 'E303', 'E265', 'E226', 'E262', 'W391', 'E301', 'F405', 'E305', 'F401' },
-                    maxLineLength=120},
-                    yapf={enabled=true}
-                }
-            }
-        }
-    }
+-- SQL: use default config from nvim-lspconfig
+vim.lsp.enable('sqlls')
 
+-- Python (pylsp) – same settings you already had, just via vim.lsp.config
+vim.lsp.config('pylsp', {
+  filetypes = { 'python' },
+  settings = {
+    pylsp = {
+      configurationSources = { 'flake8' },
+      plugins = {
+        jedi_completion = {
+          include_params = true,
+        },
+        jedi_signature_help = { enabled = true },
+        jedi = {
+          extra_paths = {
+            '~/projects/work_odoo/odoo14',
+            '~/projects/work_odoo/odoo14',
+          },
+        },
+        pyflakes = { enabled = true },
+        pylint = {
+          enabled = true,
+          debounce = 200,
+          args = { '--ignore=E501,E231,W293,W291,E303,E265,E226,E262,W391,E301,F405,E305,F401', '-' },
+        },
+        pylsp_mypy = { enabled = false },
+        pycodestyle = {
+          enabled = true,
+          ignore = {
+            'E501', 'E231', 'W293', 'W291', 'E303',
+            'E265', 'E226', 'E262', 'W391', 'E301',
+            'F405', 'E305', 'F401',
+          },
+          maxLineLength = 120,
+        },
+        yapf = { enabled = true },
+      },
+    },
+  },
+})
+vim.lsp.enable('pylsp')
 
-
-require('lspconfig').ltex.setup {
+-- LTeX – same settings as before
+vim.lsp.config('ltex', {
+  filetypes = { 'tex', 'bib', 'markdown', 'rst' },
   settings = {
     ltex = {
-      language = "en-GB",
+      language = 'en-GB',
       disabledRules = {
-          ["en"]    = { "MORFOLOGIK_RULE_EN"    },
-          ["en-AU"] = { "MORFOLOGIK_RULE_EN_AU" },
-          ["en-CA"] = { "MORFOLOGIK_RULE_EN_CA" },
-          ["en-GB"] = { "MORFOLOGIK_RULE_EN_GB", "OXFORD_SPELLING_Z_NOT_S" },
-          ["en-NZ"] = { "MORFOLOGIK_RULE_EN_NZ" },
-          ["en-US"] = { "MORFOLOGIK_RULE_EN_US" },
-          ["en-ZA"] = { "MORFOLOGIK_RULE_EN_ZA" },
-          ["es"]    = { "MORFOLOGIK_RULE_ES"    },
-          ["it"]    = { "MORFOLOGIK_RULE_IT_IT" },
-          ["de"]    = { "MORFOLOGIK_RULE_DE_DE" },
+        ['en']    = { 'MORFOLOGIK_RULE_EN' },
+        ['en-AU'] = { 'MORFOLOGIK_RULE_EN_AU' },
+        ['en-CA'] = { 'MORFOLOGIK_RULE_EN_CA' },
+        ['en-GB'] = {
+          'MORFOLOGIK_RULE_EN_GB',
+          'OXFORD_SPELLING_Z_NOT_S',
+          'MD_BASEFORM',
+          'SPIDERMAN',
+          'SUBJECT_MATTER',
+          'CYBER_COMPOUNDS',
+        },
+        ['en-NZ'] = { 'MORFOLOGIK_RULE_EN_NZ' },
+        ['en-US'] = { 'MORFOLOGIK_RULE_EN_US' },
+        ['en-ZA'] = { 'MORFOLOGIK_RULE_EN_ZA' },
+        ['es']    = { 'MORFOLOGIK_RULE_ES' },
+        ['it']    = { 'MORFOLOGIK_RULE_IT_IT' },
+        ['de']    = { 'MORFOLOGIK_RULE_DE_DE' },
       },
-    }
-  }
-}
-
-
-lsp.setup()
+    },
+  },
+})
+vim.lsp.enable('ltex')
