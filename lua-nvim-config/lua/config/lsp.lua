@@ -1,18 +1,9 @@
-local lsp = require('lsp-zero').preset({})
 local luasnip = require('luasnip')
 local cmp = require('cmp')
-
-lsp.on_attach(function(client, bufnr)
-  -- see :help lsp-zero-keybindings
-  -- to learn the available actions
-  lsp.default_keymaps({buffer = bufnr})
-end)
-
 
 -- I don't know how it works, but the below will make <Tab> and <S-Tab> work for autocompletion stuff!!
 
 cmp.setup({
-
   sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'luasnip' }, -- For luasnip users.
@@ -35,15 +26,15 @@ cmp.setup({
     ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
     ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+    -- ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
     ['<C-e>'] = cmp.mapping({
         i = cmp.mapping.abort(),
         c = cmp.mapping.close(),
       }),
-    -- ["<CR>"] = cmp.mapping.confirm({
-    --     behavior = cmp.ConfirmBehavior.Replace,
-    --     select = true,
-    --   }),
+    ["<C-y>"] = cmp.mapping.confirm({
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = true,
+      }),
     ['<Tab>'] = function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -67,6 +58,34 @@ cmp.setup({
 }
 )
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+local ok_cmp, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
+if ok_cmp then
+  capabilities = cmp_lsp.default_capabilities(capabilities)
+end
+
+local function on_attach(client, bufnr)
+  -- Simple example keymaps. Add or tweak as you like.
+  local map = function(mode, lhs, rhs)
+    vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true })
+  end
+
+  map('n', 'gd', vim.lsp.buf.definition)
+  map('n', 'K', vim.lsp.buf.hover)
+  map('n', 'gr', vim.lsp.buf.references)
+  map('n', '<leader>rn', vim.lsp.buf.rename)
+  map('n', '<leader>ca', vim.lsp.buf.code_action)
+end
+
+-- Optional: use a single LspAttach autocmd instead of per-server on_attach
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    on_attach(client, bufnr)
+  end,
+})
+
 -- -- Fix the presentation of errors
 -- vim.diagnostic.config({
 --   virtual_text = false
@@ -79,87 +98,94 @@ cmp.setup({
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {},
-  handlers = {
-    lsp.default_setup,
-  },
+  -- 1. Servers Mason should install for you
+  ensure_installed = { 'lua_ls', 'pylsp', 'ltex', 'gopls', 'sqlls' },
 })
-
-
-
--- Lua language server (reuse lsp-zero's helper config)
-vim.lsp.config('lua_ls', lsp.nvim_lua_ls())
-vim.lsp.enable('lua_ls')
-
--- SQL: use default config from nvim-lspconfig
-vim.lsp.enable('sqlls')
 
 -- Python (pylsp) – same settings you already had, just via vim.lsp.config
 vim.lsp.config('pylsp', {
-  filetypes = { 'python' },
-  settings = {
-    pylsp = {
-      configurationSources = { 'flake8' },
-      plugins = {
-        jedi_completion = {
-          include_params = true,
+    filetypes = { 'python' },
+    settings = {
+        pylsp = {
+            configurationSources = { 'flake8' },
+            plugins = {
+                jedi_completion = {
+                    include_params = true,
+                },
+                jedi_signature_help = { enabled = true },
+                jedi = {
+                    extra_paths = {
+                        '~/projects/work_odoo/odoo14',
+                        '~/projects/work_odoo/odoo14',
+                    },
+                },
+                pyflakes = { enabled = true },
+                pylint = {
+                    enabled = true,
+                    debounce = 200,
+                    args = { '--ignore=E501,E231,W293,W291,E303,E265,E226,E262,W391,E301,F405,E305,F401', '-' },
+                },
+                pylsp_mypy = { enabled = false },
+                pycodestyle = {
+                    enabled = true,
+                    ignore = {
+                        'E501', 'E231', 'W293', 'W291', 'E303',
+                        'E265', 'E226', 'E262', 'W391', 'E301',
+                        'F405', 'E305', 'F401',
+                    },
+                    maxLineLength = 120,
+                },
+                yapf = { enabled = true },
+            },
         },
-        jedi_signature_help = { enabled = true },
-        jedi = {
-          extra_paths = {
-            '~/projects/work_odoo/odoo14',
-            '~/projects/work_odoo/odoo14',
-          },
-        },
-        pyflakes = { enabled = true },
-        pylint = {
-          enabled = true,
-          debounce = 200,
-          args = { '--ignore=E501,E231,W293,W291,E303,E265,E226,E262,W391,E301,F405,E305,F401', '-' },
-        },
-        pylsp_mypy = { enabled = false },
-        pycodestyle = {
-          enabled = true,
-          ignore = {
-            'E501', 'E231', 'W293', 'W291', 'E303',
-            'E265', 'E226', 'E262', 'W391', 'E301',
-            'F405', 'E305', 'F401',
-          },
-          maxLineLength = 120,
-        },
-        yapf = { enabled = true },
-      },
     },
-  },
 })
-vim.lsp.enable('pylsp')
 
 -- LTeX – same settings as before
 vim.lsp.config('ltex', {
-  filetypes = { 'tex', 'bib', 'markdown', 'rst' },
-  settings = {
-    ltex = {
-      language = 'en-GB',
-      disabledRules = {
-        ['en']    = { 'MORFOLOGIK_RULE_EN' },
-        ['en-AU'] = { 'MORFOLOGIK_RULE_EN_AU' },
-        ['en-CA'] = { 'MORFOLOGIK_RULE_EN_CA' },
-        ['en-GB'] = {
-          'MORFOLOGIK_RULE_EN_GB',
-          'OXFORD_SPELLING_Z_NOT_S',
-          'MD_BASEFORM',
-          'SPIDERMAN',
-          'SUBJECT_MATTER',
-          'CYBER_COMPOUNDS',
+    capabilities = capabilities,
+    filetypes = { 'tex', 'bib', 'markdown', 'rst' },
+    settings = {
+        ltex = {
+            language = 'en-GB',
+            disabledRules = {
+                ['en']    = { 'MORFOLOGIK_RULE_EN' },
+                ['en-AU'] = { 'MORFOLOGIK_RULE_EN_AU' },
+                ['en-CA'] = { 'MORFOLOGIK_RULE_EN_CA' },
+                ['en-GB'] = {
+                    'MORFOLOGIK_RULE_EN_GB',
+                    'OXFORD_SPELLING_Z_NOT_S',
+                    'MD_BASEFORM',
+                    'SPIDERMAN',
+                    'SUBJECT_MATTER',
+                    'CYBER_COMPOUNDS',
+                },
+                ['en-NZ'] = { 'MORFOLOGIK_RULE_EN_NZ' },
+                ['en-US'] = { 'MORFOLOGIK_RULE_EN_US' },
+                ['en-ZA'] = { 'MORFOLOGIK_RULE_EN_ZA' },
+                ['es']    = { 'MORFOLOGIK_RULE_ES' },
+                ['it']    = { 'MORFOLOGIK_RULE_IT_IT' },
+                ['de']    = { 'MORFOLOGIK_RULE_DE_DE' },
+            },
         },
-        ['en-NZ'] = { 'MORFOLOGIK_RULE_EN_NZ' },
-        ['en-US'] = { 'MORFOLOGIK_RULE_EN_US' },
-        ['en-ZA'] = { 'MORFOLOGIK_RULE_EN_ZA' },
-        ['es']    = { 'MORFOLOGIK_RULE_ES' },
-        ['it']    = { 'MORFOLOGIK_RULE_IT_IT' },
-        ['de']    = { 'MORFOLOGIK_RULE_DE_DE' },
+    },
+})
+
+vim.lsp.config('lua_ls', {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
       },
+      diagnostics = {
+        globals = { 'vim' },
+      },
+      workspace = {
+        checkThirdParty = false,
+      },
+      telemetry = { enable = false },
     },
   },
 })
-vim.lsp.enable('ltex')

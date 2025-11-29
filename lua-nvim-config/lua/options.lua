@@ -30,7 +30,8 @@ vim.opt.foldenable = false
 
 vim.opt.conceallevel = 1
 
-
+-- Make column to left of line numbers always have space for eror signs
+vim.opt.signcolumn = "yes:1"
 
 local api = vim.api
 api.nvim_create_autocmd({ 'BufRead', 'BufReadPost' }, {
